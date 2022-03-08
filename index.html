@@ -1,0 +1,86 @@
+<!-- Created by Sumeet Singh Oberoy -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Validator</title>
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi|Black+Han+Sans|Maven+Pro|ZCOOL+QingKe+HuangYou" rel="stylesheet"> 
+</head>
+<body>
+  <h1>Password Validator</h1>
+  <div>
+    <input id="text" type="text" placeholder="Enter Password" spellcheck="false" autocomplete="false">
+    <span>Minimum length is 5;</span>
+    <span>Maximum length is 10;</span>
+    <span>Should contain at least one number;</span>
+    <span>Should contain atleast one special character;</span>
+    <span>Should not contain spaces;</span>
+  </div>
+  <script>
+        let input = document.getElementById('text');
+        let box = document.querySelectorAll("span");
+        let stylGreen = "background: rgba(102,255,102, 0.2); border-color: rgb(102,255,102); color: lightgreen;";
+        let stylRed = "background: rgba(231, 76, 60, 0.2); border-color: #e74c3c; color: #ff3f34;";
+        
+        let capital = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+        let number = ['0','1','2','3','4','5','6','7','8','9'];
+        let special = ['&','@','$','%','+','#','/','*'];
+        let small = [];
+        for ( let i = 0; i <= 25; i++ ) {
+          let smaller = capital[i].toLowerCase();
+          small = [...small,smaller];
+        }
+        
+        const inputProcess = () => {
+          let c = 0;
+          let s = 0;
+          let t = 0;
+          if ( input.value.length >= 5 ) {
+            box[0].style = stylGreen;
+            if ( input.value.length <= 10 ) {
+              box[1].style = stylGreen;
+            }
+            else {
+              box[1].style = stylRed;
+            }
+          }
+          else {
+            box[0].style = stylRed;
+            box[1].style = stylRed;
+          }
+          for ( let z of input.value ) {
+            if ( z == " " ) {
+              t++;
+            }
+            if ( special.indexOf( z ) !== -1 ) {
+              s++;
+            }
+            if ( number.indexOf( z ) !== -1 ) {
+              c++;
+            }
+          }
+          if ( c >= 1 ) {
+                box[2].style = stylGreen;
+              }
+          else {
+            box[2].style = stylRed;
+          }
+          if ( s >= 1 ) {
+            box[3].style = stylGreen;
+          }
+          else {
+            box[3].style = stylRed;
+          }
+          if ( t >= 1 ) {
+            box[4].style = stylRed;
+          }
+          else {
+            box[4].style = stylGreen;
+          }
+        }
+        
+        input.addEventListener( "input", inputProcess );
+  </script>
+</body>
+</html>
